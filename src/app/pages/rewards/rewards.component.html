@@ -1,0 +1,22 @@
+<app-commands></app-commands>
+<app-grid-wrapper>
+  <app-song-queue class="colspan"></app-song-queue>
+  <app-info-box
+    [center]="true"
+    [small]="true"
+    title="Aktywuj automatyczne dodawanie piosenek do SR za pomocą nagrody kanału."
+  >
+    <p>Po stworzeniu nagrody na twitch kup ją, a w wiadomości wpisz</p>
+    <p>"add-song-award"</p>
+  </app-info-box>
+  <app-info-box
+    [center]="true"
+    [small]="true"
+    title="Aktywuj automatyczne pomijanie piosenek za pomocą nagrody kanału."
+  >
+    <p>Po stworzeniu nagrody na twitch kup ją, a w wiadomości wpisz</p>
+    <p>"skip-song-award"</p>
+  </app-info-box>
+  <app-song-volume class="colspan"></app-song-volume>
+  <app-slots class="colspan"></app-slots>
+</app-grid-wrapper>

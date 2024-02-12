@@ -1,0 +1,39 @@
+<app-info-box
+  title="Połącz się z kontem Riot Games, aby mieć dostęp do komend: !ranking, !staty, !mecze, !mecz"
+  class="colspan"
+  [small]="true"
+>
+  <form #riotForm="ngForm" class="flex-box" (submit)="createRiotAccount()">
+    <mat-form-field>
+      <input
+        #name="ngModel"
+        name="accountId"
+        matInput
+        placeholder="Nazwa konta"
+        required
+        [(ngModel)]="riotAccountData.name"
+      />
+      <mat-error *ngIf="name.hasError('required')"> To pole jest wymagane </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Server</mat-label>
+      <mat-select required [(value)]="riotAccountData.server" name="server">
+        <mat-option *ngFor="let server of servers" [value]="server">
+          {{ userServerName(server) }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button class="button" color="accent" [disabled]="riotForm.form.invalid">Dodaj konto</button>
+  </form>
+  <div class="account-list">
+    <h2 class="account-tittle" *ngIf="$riotAccounts()?.length > 0">Lista kont Riot połączona z botem</h2>
+    <div class="account" *ngFor="let account of $riotAccounts()">
+      <p class="account-name">{{ account.name }}</p>
+      <p class="account-server">{{ userServerName(account.server) }}</p>
+
+      <button mat-icon-button color="warn" aria-label="Delete riot account" (click)="deleteRiotAccount(account)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</app-info-box>

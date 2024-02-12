@@ -1,0 +1,35 @@
+<app-info-box [center]="true" [small]="true" title="Modyfikacja kolejki songrequest na Stream Elements">
+  <div class="wrapper">
+    <label matTooltip="Automatycznie pauzuj spotify po dodaniu piosenki do Stream Elements">
+      <p>Automatycznie pauzuj spotify po dodaniu piosenki do Stream Elements</p>
+      <mat-slide-toggle
+        [checked]="$queueData().pauseAfterRequest"
+        [(ngModel)]="$queueData().pauseAfterRequest"
+        [ngModelOptions]="{ standalone: true }"
+      ></mat-slide-toggle>
+    </label>
+
+    <label matTooltip="Usuwaj piosenki z kolejki, które już leciały nie usuwa piosenek kupionych w donate">
+      <p>Usuwaj piosenki z kolejki, które już leciały</p>
+      <mat-slide-toggle
+        [checked]="$queueData().isActive"
+        [(ngModel)]="$queueData().isActive"
+        [ngModelOptions]="{ standalone: true }"
+      ></mat-slide-toggle>
+    </label>
+    <div>
+      <p>Podaj ilość piosenek do tyłu, które ma pamiętać przy usuwaniu powtarzających się piosenek z kolejki</p>
+      <mat-form-field>
+        <input
+          matInput
+          type="number"
+          name="size"
+          placeholder="ilość emotek"
+          [(ngModel)]="$queueData().size"
+          [disabled]="!$queueData().isActive"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+  <button (click)="setSongQueue()" mat-raised-button class="button" color="accent">Zapisz opcje</button>
+</app-info-box>

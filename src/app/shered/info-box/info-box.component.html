@@ -1,0 +1,6 @@
+<div class="info-box" [ngClass]="{ 'info-box--center': center }">
+  <h2 *ngIf="title" class="info-title" [ngClass]="{ 'info-title--small': small }">
+    {{ title }}
+  </h2>
+  <ng-content></ng-content>
+</div>

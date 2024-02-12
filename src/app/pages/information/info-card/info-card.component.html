@@ -1,0 +1,8 @@
+<div class="info" *ngFor="let commend of commendList; trackBy: identify">
+  <p *ngIf="commend?.name" class="command-name">
+    {{ commend.name }}
+  </p>
+  <p class="command-description">
+    {{ commend?.description }}
+  </p>
+</div>

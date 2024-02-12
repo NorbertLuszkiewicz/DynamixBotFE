@@ -1,0 +1,40 @@
+<app-info-box [small]="true" [center]="true" title="Wprowadź obie wartości poniżej aby połączyć Stream Elements">
+  <p>Account ID jak i JWT Token znajdziesz pod adresem</p>
+  <a href="https://streamelements.com/dashboard/account/channels" rel="noopener noreferrer" target="_blank"
+    >streamelements.com/dashboard/account/channels</a
+  >
+  <p style="margin-top: 10px">po kliknięciu w "Show secrets" z prawej strony</p>
+  <form (submit)="createStreamElements()">
+    <mat-form-field>
+      <input
+        #accountId="ngModel"
+        name="accountId"
+        matInput
+        placeholder="Account ID"
+        [(ngModel)]="streamElementsData.accountId"
+        required
+      />
+      <mat-error *ngIf="accountId.hasError('required')"> To pole jest wymagane </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        #jwtToken="ngModel"
+        name="jwtToken"
+        matInput
+        placeholder="JWT Token "
+        [(ngModel)]="streamElementsData.jwtToken"
+        required
+      />
+      <mat-error *ngIf="jwtToken.hasError('required')"> To pole jest wymagane </mat-error>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      class="button"
+      color="accent"
+      [disabled]="jwtToken.hasError('required') || accountId.hasError('required')"
+      mat-button
+    >
+      Stream Elements
+    </button>
+  </form>
+</app-info-box>

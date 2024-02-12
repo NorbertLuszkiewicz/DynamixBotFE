@@ -1,1 +1,77 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+@include mat.core();
+
+$my-primary: mat.define-palette(mat.$orange-palette, 700, 900, A100);
+$my-accent: mat.define-palette(mat.$purple-palette, 700, 900, A100);
+$my-warn: mat.define-palette(mat.$red-palette, 700, 900, A100);
+$my-success: mat.define-palette(mat.$green-palette, 700, 900, A100);
+
+$my-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+      warn: $my-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+@include mat.all-component-themes($my-theme);
+$custom: map-get($my-theme, custom);
+
+:root {
+  --backgroundColor: #020b20;
+  --backgroundColorLighten: #020b20;
+  --primaryColor: #ff8855;
+  --success: #009908;
+  --secondaryColor: #f50057;
+  --white: #fff;
+}
+
+html,
+body {
+  background: var(--backgroundColor);
+  color: var(--white);
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-size: 115%;
+}
+
+a {
+  color: var(--primaryColor);
+  text-decoration: none;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.spacer {
+  flex: 1 1 0%;
+}
+
+@media (max-width: 1000px) {
+  a {
+    font-size: 85%;
+  }
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-size: 100%;
+  }
+}

@@ -1,0 +1,5 @@
+<div class="status-list" StatusBox>
+  @for(status of $statusList(); track status.name) {
+  <div class="status" [ngClass]="{ 'status--active': status.active }">{{ status.name }}</div>
+  }
+</div>

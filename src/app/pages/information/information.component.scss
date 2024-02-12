@@ -1,0 +1,21 @@
+h3 {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.info {
+  padding: 5px 5px 0 5px;
+  transition: background-color 0.3s;
+  border-radius: 20px;
+  margin-bottom: 5px;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.command-name {
+  color: var(--primaryColor);
+  font-weight: 500;
+}

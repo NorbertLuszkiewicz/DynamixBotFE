@@ -1,0 +1,29 @@
+.info-title {
+  font-size: 2.2rem;
+
+  &--small {
+    font-size: 1.6rem;
+  }
+
+  @media screen and (max-width: 1000px) {
+    font-size: 1.6rem;
+
+    &--small {
+      font-size: 1.4rem;
+    }
+  }
+}
+
+.info-box {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-radius: 30px;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.06);
+  height: 100%;
+
+  &--center {
+    justify-content: center;
+  }
+}

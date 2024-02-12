@@ -1,0 +1,13 @@
+label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding-top: 20px;
+}

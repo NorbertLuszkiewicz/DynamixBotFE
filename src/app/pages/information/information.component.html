@@ -1,0 +1,9 @@
+<app-grid-wrapper>
+  <app-info-box *ngFor="let commend of getCommandsList(); trackBy: identify" [title]="commend.title">
+    <app-info-card [commendList]="commend.list"></app-info-card>
+  </app-info-box>
+</app-grid-wrapper>
+
+<div class="contact">
+  <h3>W sprawie pomysłów oraz probremów, proszę pisać do DynaM1X1 na twitch lub Dynamix#1054 na discord</h3>
+</div>

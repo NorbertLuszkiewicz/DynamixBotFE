@@ -1,0 +1,42 @@
+<app-info-box [center]="true" [small]="true" title="Aktywuj automatyczną zmianę głośności za pomocą nagrody kanału.">
+  <p>👉🏻 Stwórz nagrodę kanału na swoim kanale</p>
+  <p>👉🏻 Ustaw poniżej odpowiednie wartości i zapisz opcje</p>
+  <p>👉🏻 Odbierz swoją nagrodę kanału a w wiadomości napisz</p>
+  <p>"change-volume-song-award"</p>
+
+  <form class="change-volume-form" (submit)="onSubmit()">
+    <div class="slider-wrapper">
+      <label>
+        Domyślna głośność na Spotify
+        <mat-slider discrete>
+          <input name="defaultVolumeSpotify" matSliderThumb [(ngModel)]="$data().min" />
+        </mat-slider>
+      </label>
+      <label>
+        Domyślna głośność na StreamElements
+        <mat-slider discrete>
+          <input name="defaultVolumeSE" matSliderThumb [(ngModel)]="$data().minSR" />
+        </mat-slider>
+      </label>
+      <label>
+        Głosność po użyciu nagrody na Spotify
+        <mat-slider discrete>
+          <input name="maxVolumeSpotify" matSliderThumb [(ngModel)]="$data().max" />
+        </mat-slider>
+      </label>
+      <label>
+        Głosność po użyciu nagrody na StreamElements
+        <mat-slider discrete>
+          <input name="maxVolumeSE" matSliderThumb [(ngModel)]="$data().maxSR" />
+        </mat-slider>
+      </label>
+      <label class="wide-slider">
+        Czas trwania nagrody (w sekundach)
+        <mat-slider max="300" discrete>
+          <input name="time" matSliderThumb [(ngModel)]="$data().time" />
+        </mat-slider>
+      </label>
+    </div>
+    <button mat-raised-button class="button" color="accent">Zapisz opcje</button>
+  </form>
+</app-info-box>

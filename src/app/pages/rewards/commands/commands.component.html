@@ -1,0 +1,26 @@
+<div class="wrapper">
+  <label matTooltip="Komendy: !pogoda, !horoskop" (click)="changeCommand()">
+    <mat-slide-toggle [(ngModel)]="commands.weather"> </mat-slide-toggle>
+    Pogoda
+  </label>
+  <label matTooltip="Komendy: !mecz, !mecze, !staty, !ranking" (click)="changeCommand()">
+    <mat-slide-toggle [(ngModel)]="commands.tft"> </mat-slide-toggle>
+    TFT
+  </label>
+  <label matTooltip="Komendy: !chessuser, !chesslast" (click)="changeCommand()">
+    <mat-slide-toggle [(ngModel)]="commands.chess"> </mat-slide-toggle>
+    Szachy
+  </label>
+  <label matTooltip="Komendy: !wordle" (click)="changeCommand()">
+    <mat-slide-toggle [(ngModel)]="commands.wordle"> </mat-slide-toggle>
+    Wordle
+  </label>
+  <label matTooltip="Komendy: !slots" (click)="changeCommand()">
+    <mat-slide-toggle [(ngModel)]="commands.slots"> </mat-slide-toggle>
+    Slots
+  </label>
+  <label matTooltip="Komendy: !song, !playlist" (click)="changeCommand()">
+    <mat-slide-toggle [(ngModel)]="commands.song"> </mat-slide-toggle>
+    Song
+  </label>
+</div>

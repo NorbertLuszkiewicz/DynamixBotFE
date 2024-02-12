@@ -1,0 +1,56 @@
+@keyframes shrinkAnimation {
+  from {
+    transform: translateX(-50%) scaleX(1);
+  }
+  to {
+    transform: translateX(-50%) scaleX(0);
+  }
+}
+
+@keyframes slideAnimation {
+  from {
+    transform: translateX(-50%) translateY(200%);
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.wrapper {
+  position: fixed;
+  min-width: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10%;
+  background-color: #242b3e;
+  padding: 25px 25px 15px;
+  color: var(--secondaryColor);
+  border: 3px solid var(--secondaryColor);
+  border-radius: 15px;
+  animation: slideAnimation 1s ease-in-out 1 forwards, slideAnimation 1s 4s ease-in-out 1 reverse forwards;
+  z-index: 9;
+  text-align: center;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 15px;
+    transform: translateX(-50%);
+    background-color: var(--secondaryColor);
+    width: 60px;
+    height: 5px;
+    border-radius: 50px;
+  }
+
+  &::before {
+    opacity: 0.5;
+  }
+
+  &::after {
+    transform: translateX(-50%) scaleX(1);
+    transform-origin: left top;
+    animation: shrinkAnimation 3s 1s linear 1 forwards;
+  }
+}

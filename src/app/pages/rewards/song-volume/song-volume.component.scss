@@ -1,0 +1,26 @@
+.change-volume-form {
+  display: flex;
+  flex-direction: column;
+}
+
+label,
+.slider-wrapper {
+  display: grid;
+}
+
+.slider-wrapper {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 10px 30px;
+  margin-bottom: 20px;
+}
+
+.wide-slider {
+  grid-column: 1 / 3;
+}
+
+.button {
+  height: 44px;
+  width: 150px;
+  margin: -4px auto 0;
+}

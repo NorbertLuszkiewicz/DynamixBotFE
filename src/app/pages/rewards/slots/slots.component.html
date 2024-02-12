@@ -1,0 +1,87 @@
+<app-info-box [center]="true" [small]="true" title="Dodaj nagrody typu slots">
+  <p>👉🏻 Stwórz nagrodę kanału na swoim kanale</p>
+  <p>👉🏻 Ustaw poniżej odpowiednie wartości i zapisz nagrodę</p>
+  <p>👉🏻 Odbierz swoją nagrodę kanału na twitch a w wiadomości napisz</p>
+  <p>👉🏻 Nazwę nagrody, którą podałeś w formularzu poniżej 👇🏻</p>
+  {{ slotsData | json }}
+  <form #slotsForm="ngForm" class="slots-form" (submit)="createSlotsAward()">
+    <mat-form-field>
+      <input #name="ngModel" name="name" matInput placeholder="Nazwa nagrody" [(ngModel)]="slotsData.name" required />
+      <mat-error *ngIf="name.hasError('required')"> To pole jest wymagane </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        #emotes="ngModel"
+        matInput
+        type="number"
+        name="emotes"
+        placeholder="ilość emotek"
+        [(ngModel)]="slotsData.emotes"
+        required
+        max="15"
+        (change)="calcWinningPercentage()"
+      />
+      <mat-error *ngIf="emotes.hasError('required')"> To pole jest wymagane </mat-error>
+    </mat-form-field>
+    <span class="winning-percentage">win: {{ winningPercentage }}%</span>
+    <div>
+      <label matTooltip="10min t/o przy przegranej, nic przy 2/3 emotek">
+        T/o za przegranie
+        <mat-slide-toggle
+          [checked]="slotsData.withBan"
+          [(ngModel)]="slotsData.withBan"
+          [ngModelOptions]="{ standalone: true }"
+        ></mat-slide-toggle>
+      </label>
+    </div>
+    <button mat-raised-button class="button" color="accent" [disabled]="slotsForm.form.invalid">Zapisz nagrodę</button>
+  </form>
+  <div class="slots-list">
+    <h2 class="slots-tittle" *ngIf="$slots().length > 0">Lista kont Riot połączona z botem</h2>
+    <table mat-table [dataSource]="$slots()" class="slots-table">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nazwa</th>
+        <td mat-cell *matCellDef="let el">{{ el.name }}</td>
+      </ng-container>
+      <ng-container matColumnDef="withBan">
+        <th mat-header-cell *matHeaderCellDef>T/o dla przegranych</th>
+        <td mat-cell *matCellDef="let el">
+          {{ el.withBan ? "Włączono" : "Wyłączono" }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="emotes">
+        <th mat-header-cell *matHeaderCellDef>Szansa na wygraną</th>
+        <td mat-cell *matCellDef="let el">
+          {{ ((1 / el.emotes / el.emotes) * 100).toFixed(2) + "%" }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="times">
+        <th mat-header-cell *matHeaderCellDef>Ilość prób</th>
+        <td mat-cell *matCellDef="let el">{{ el.times }}</td>
+      </ng-container>
+      <ng-container matColumnDef="wins">
+        <th mat-header-cell *matHeaderCellDef>Ilość wygranych</th>
+        <td mat-cell *matCellDef="let el">{{ el.wins }}</td>
+      </ng-container>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Aktywne</th>
+        <td mat-cell *matCellDef="let el">{{ el.id ? "Tak" : "Nie" }}</td>
+      </ng-container>
+      <ng-container matColumnDef="last-winners">
+        <th mat-header-cell *matHeaderCellDef>Ostatnio wygrali</th>
+        <td mat-cell *matCellDef="let el">{{ el.lastWinners?.length > 0 ? el.lastWinners : "-" }}</td>
+      </ng-container>
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>Usuń</th>
+        <td mat-cell *matCellDef="let el">
+          <button mat-icon-button color="warn" aria-label="Delete slots award" (click)="deleteSlot(el)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</app-info-box>

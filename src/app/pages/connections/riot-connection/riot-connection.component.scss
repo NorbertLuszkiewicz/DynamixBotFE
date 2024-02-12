@@ -1,0 +1,43 @@
+.button {
+  height: 44px;
+  width: 150px;
+  margin: -4px auto 0;
+}
+
+mat-form-field {
+  color: var(--white);
+  margin: 2px 20px;
+}
+
+.account {
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 20px auto;
+  border-bottom: 1px solid var(--primaryColor);
+
+  & > p {
+    margin: 0;
+  }
+}
+
+.account-tittle {
+  margin: 20px;
+}
+
+:host {
+  ::ng-deep {
+    .mat-mdc-text-field-wrapper {
+      height: 44px;
+    }
+    .mat-mdc-form-field-infix {
+      padding: 11px 0 !important;
+    }
+
+    .mdc-floating-label {
+      margin-top: -8px;
+      margin-left: -10px;
+    }
+  }
+}
