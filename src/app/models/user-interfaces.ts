@@ -54,8 +54,7 @@ export type RiotUser = {
 export type SongData = {
   streamer?: string;
   addSongID?: string;
-  volumeChanger?: string;
-  volumeSongID?: VolumeSong;
+  volumeChanger?: VolumeSong;
   timeoutVolume?: any;
   maxVolumeTime?: number;
   endTime?: number;

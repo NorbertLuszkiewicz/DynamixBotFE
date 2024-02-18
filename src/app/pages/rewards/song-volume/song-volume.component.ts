@@ -26,7 +26,7 @@ export class SongVolumeComponent {
     time: 60,
   };
   public readonly $data: Signal<VolumeSong> = computed(() => {
-    const newData = this.$songsUser().volumeSongID;
+    const newData = this.$songsUser().volumeChanger;
     return newData ? { ...newData, time: newData.time / 1000 } : this.initialData;
   });
 
