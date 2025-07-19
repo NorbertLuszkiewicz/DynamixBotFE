@@ -116,13 +116,13 @@ export class InformationComponent {
 
   private additionalInformationList = [
     {
-      name: '!chessuser [nickname]/ !szachista [nickname]',
-      description: 'Bot musi być moderatorem czatu, aby działał poprawnie',
+      name: '',
+      description: 'W celu zapewnienia pełnej funkcjonalności, bot powinien posiadać status moderatora na czacie',
     },
     {
-      name: '!chesslast [nickname]',
+      name: '',
       description:
-        'Aby bot działał poprawnie z nagrodami za punkty kanału, nagrody te muszą mieć możliwość wpisania tekstu',
+        'Nagrody kanałowe muszą mieć aktywowaną opcję wprowadzania tekstu przez użytkownika, aby mogły być obsługiwane przez bota',
     },
   ];
 
