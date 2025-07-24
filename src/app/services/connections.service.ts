@@ -97,4 +97,20 @@ export class ConnectionsService {
   connectSpotify(streamerName: string): void {
     window.location.href = `${environment.url}spotify?user=${streamerName}`;
   }
+
+  connectKick(streamerName: string): void {
+    createCodeChallenge('code_verifier').then((challenge) => {
+      const redirectUrl = `&redirect_uri=${environment.url}kickRedirect?nick=${streamerName.toLowerCase()}`;
+      window.location.href = `${environment.kickLoginRedirect}${challenge}${redirectUrl}`;
+    });
+  }
+}
+
+async function createCodeChallenge(verifier: string): Promise<string> {
+  const data = new TextEncoder().encode(verifier);
+  const digest = await crypto.subtle.digest('SHA-256', data);
+  return btoa(String.fromCharCode(...new Uint8Array(digest)))
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '');
 }

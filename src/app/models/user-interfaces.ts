@@ -25,6 +25,8 @@ export type User = {
   streamer?: string;
   twitchAccessToken?: string;
   twitchRefreshToken?: string;
+  kickAccessToken?: string;
+  kickRefreshToken?: string;
   clientSongRequestID?: string;
   clientSongRequestSecret?: string;
   spotifyAccessToken?: string;

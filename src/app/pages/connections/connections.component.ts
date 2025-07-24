@@ -4,6 +4,7 @@ import { RiotConnectionComponent } from './riot-connection/riot-connection.compo
 import { SpotifyConnectionComponent } from './spotify-connection/spotify-connection.component';
 import { StatusComponent } from './status/status.component';
 import { StreamElementsConnectionComponent } from './stream-elements-connection/stream-elements-connection.component';
+import { KickConnectionComponent } from './kick-connection/kick-connection.component';
 
 @Component({
   selector: 'app-connections',
@@ -14,6 +15,7 @@ import { StreamElementsConnectionComponent } from './stream-elements-connection/
     StatusComponent,
     StreamElementsConnectionComponent,
     GridWrapperComponent,
+    KickConnectionComponent,
   ],
   templateUrl: './connections.component.html',
   styleUrl: './connections.component.scss',

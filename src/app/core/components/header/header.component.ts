@@ -18,8 +18,8 @@ import { map, tap } from 'rxjs/operators';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+  private readonly loginUrl = environment.loginRedirect;
   public isOpenMenu: boolean = false;
-  public readonly loginUrl = environment.loginRedirect;
   public readonly isLoggedIn = this.authService.$user;
   public readonly isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map((result) => result.matches),
@@ -37,7 +37,7 @@ export class HeaderComponent {
   }
 
   public login() {
-    window.location.href = environment.loginRedirect;
+    window.location.href = this.loginUrl;
   }
 
   public logout() {

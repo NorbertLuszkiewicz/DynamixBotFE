@@ -9,8 +9,8 @@
       ></mat-slide-toggle>
     </label>
 
-    <label matTooltip="Usuwaj piosenki z kolejki, które już leciały nie usuwa piosenek kupionych w donate">
-      <p>Usuwaj piosenki z kolejki, które już leciały</p>
+    <label matTooltip="Usuń z kolejki utwory, które już były odtwarzane, nie usuwa piosenek kupionych w donate">
+      <p>Usuń z kolejki utwory, które już były odtwarzane</p>
       <mat-slide-toggle
         [checked]="$queueData().isActive"
         [(ngModel)]="$queueData().isActive"
@@ -18,7 +18,7 @@
       ></mat-slide-toggle>
     </label>
     <div>
-      <p>Podaj ilość piosenek do tyłu, które ma pamiętać przy usuwaniu powtarzających się piosenek z kolejki</p>
+      <p>Określ liczbę poprzednich utworów, które mają być uwzględnione podczas usuwania duplikatów z kolejki</p>
       <mat-form-field>
         <input
           matInput

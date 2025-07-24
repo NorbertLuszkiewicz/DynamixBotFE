@@ -16,7 +16,7 @@
       <mat-error *ngIf="name.hasError('required')"> To pole jest wymagane </mat-error>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Server</mat-label>
+      <mat-label>Serwer</mat-label>
       <mat-select required [(value)]="riotAccountData.server" name="server">
         <mat-option *ngFor="let server of servers" [value]="server">
           {{ userServerName(server) }}

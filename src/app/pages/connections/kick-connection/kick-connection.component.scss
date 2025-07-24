@@ -1,0 +1,22 @@
+.button {
+  height: 44px;
+  width: 150px;
+  margin: 10px auto 0;
+  background-color: var(--success);
+  color: white;
+}
+
+:host {
+  ::ng-deep {
+    .mdc-button__label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+    }
+  }
+}
+
+img {
+  height: 20px;
+}

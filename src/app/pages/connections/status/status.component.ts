@@ -15,10 +15,11 @@ export class StatusComponent {
   private readonly $riotUser = this.connectionsService.$riotUser;
   public $statusList = computed(() => {
     return [
-      { active: true, name: 'Twitch' },
-      { active: !!this.$user()?.isSpotifyConnected || false, name: 'Spotify' },
-      { active: !!this.$user()?.isStreamElementsConnected || false, name: 'Stream Elements' },
-      { active: this.$riotUser()?.riotAccountList?.length > 0 || false, name: 'Riot Games' },
+      { active: !!this.$user()?.twitchAccessToken, name: 'Twitch' },
+      { active: !!this.$user()?.kickAccessToken, name: 'Kick' },
+      { active: !!this.$user()?.isSpotifyConnected, name: 'Spotify' },
+      { active: !!this.$user()?.isStreamElementsConnected, name: 'Stream Elements' },
+      { active: !!this.$riotUser()?.riotAccountList?.length, name: 'Riot Games' },
     ];
   });
 
