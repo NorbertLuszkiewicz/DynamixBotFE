@@ -100,8 +100,21 @@ export class ConnectionsService {
 
   connectKick(streamerName: string): void {
     createCodeChallenge('code_verifier').then((challenge) => {
-      const redirectUrl = `&redirect_uri=${environment.url}kickRedirect?nick=${streamerName.toLowerCase()}`;
-      window.location.href = `${environment.kickLoginRedirect}${challenge}${redirectUrl}`;
+      const status = `${environment.production ? '' : 'local'}${streamerName.toLowerCase()}`;
+      const baseUrl = 'https://id.kick.com/oauth/authorize';
+      const params = [
+        'response_type=code',
+        'client_id=01K0VRXPBR7SFN7GR0ZYQMX709',
+        'scope=user:read channel:read channel:write chat:write events:subscribe moderation:ban',
+        'code_challenge_method=S256',
+        `code_challenge=${challenge}`,
+        `state=${status.toLowerCase()}`,
+        `redirect_uri=${environment.url}kickRedirect`,
+      ];
+      const kickLoginUrl = `${baseUrl}?${params.join('&')}`;
+
+      console.log('Kick redirect URL:', kickLoginUrl);
+      window.location.href = kickLoginUrl;
     });
   }
 }
