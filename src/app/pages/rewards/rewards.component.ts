@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { GridWrapperComponent } from '../../shered/grid-wrapper/grid-wrapper.component';
+import { GridWrapperComponent } from '../../shared/grid-wrapper/grid-wrapper.component';
 import { CommandsComponent } from './commands/commands.component';
-import { InfoBoxComponent } from '../../shered/info-box/info-box.component';
+import { InfoBoxComponent } from '../../shared/info-box/info-box.component';
 import { SlotsComponent } from './slots/slots.component';
 import { SongVolumeComponent } from './song-volume/song-volume.component';
 import { SongQueueComponent } from './song-queue/song-queue.component';

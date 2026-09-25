@@ -3,8 +3,8 @@
     <label matTooltip="Automatycznie pauzuj spotify po dodaniu piosenki do Stream Elements">
       <p>Automatycznie pauzuj spotify po dodaniu piosenki do Stream Elements</p>
       <mat-slide-toggle
-        [checked]="$queueData().pauseAfterRequest"
-        [(ngModel)]="$queueData().pauseAfterRequest"
+        [checked]="queueData.pauseAfterRequest"
+        [(ngModel)]="queueData.pauseAfterRequest"
         [ngModelOptions]="{ standalone: true }"
       ></mat-slide-toggle>
     </label>
@@ -12,8 +12,8 @@
     <label matTooltip="Usuń z kolejki utwory, które już były odtwarzane, nie usuwa piosenek kupionych w donate">
       <p>Usuń z kolejki utwory, które już były odtwarzane</p>
       <mat-slide-toggle
-        [checked]="$queueData().isActive"
-        [(ngModel)]="$queueData().isActive"
+        [checked]="queueData.isActive"
+        [(ngModel)]="queueData.isActive"
         [ngModelOptions]="{ standalone: true }"
       ></mat-slide-toggle>
     </label>
@@ -24,9 +24,9 @@
           matInput
           type="number"
           name="size"
-          placeholder="ilość emotek"
-          [(ngModel)]="$queueData().size"
-          [disabled]="!$queueData().isActive"
+          placeholder="liczba utworów"
+          [(ngModel)]="queueData.size"
+          [disabled]="!queueData.isActive"
         />
       </mat-form-field>
     </div>

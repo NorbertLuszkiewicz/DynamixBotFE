@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { GridWrapperComponent } from '../../shered/grid-wrapper/grid-wrapper.component';
+import { GridWrapperComponent } from '../../shared/grid-wrapper/grid-wrapper.component';
 import { RiotConnectionComponent } from './riot-connection/riot-connection.component';
 import { SpotifyConnectionComponent } from './spotify-connection/spotify-connection.component';
 import { StatusComponent } from './status/status.component';

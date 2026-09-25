@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { commandSwitch } from '../models/user-interfaces';
+import { Injectable, inject } from '@angular/core';
+import { Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { distinctUntilChanged, tap } from 'rxjs/operators';
 import { MessageResponse } from '../models/interfaces';
+import { CommandSwitch } from '../models/user-interfaces';
 import { AuthService } from './auth.service';
 import { ConnectionsService } from './connections.service';
 
@@ -12,13 +11,11 @@ import { ConnectionsService } from './connections.service';
   providedIn: 'root',
 })
 export class RewardsService {
-  constructor(
-    private http: HttpClient,
-    private authService: AuthService,
-    private connectionsService: ConnectionsService
-  ) {}
+  private readonly http = inject(HttpClient);
+  private readonly authService = inject(AuthService);
+  private readonly connectionsService = inject(ConnectionsService);
 
-  addChangeVolumeAward(
+  public addChangeVolumeAward(
     min: number,
     max: number,
     minSR: number,
@@ -38,12 +35,12 @@ export class RewardsService {
       .pipe(
         tap((data) => {
           this.connectionsService.getSongsUser();
-          this.authService.successMessage.set(data.message || 'Volume award changed');
+          this.authService.setSuccessMessage(data.message ?? 'Volume award changed');
         })
       );
   }
 
-  setSongQueue(
+  public setSongQueue(
     isActive: boolean,
     size: number,
     pauseAfterRequest: boolean,
@@ -59,12 +56,17 @@ export class RewardsService {
       .pipe(
         tap((data) => {
           this.connectionsService.getSongsUser();
-          this.authService.successMessage.set(data.message || 'Song queue data changed');
+          this.authService.setSuccessMessage(data.message ?? 'Song queue data changed');
         })
       );
   }
 
-  addSlotsAward(name: string, emotes: number, withBan: boolean, streamerName: string): Observable<MessageResponse> {
+  public addSlotsAward(
+    name: string,
+    emotes: number,
+    withBan: boolean,
+    streamerName: string
+  ): Observable<MessageResponse> {
     return this.http
       .put<MessageResponse>(`${environment.url}slots`, {
         name,
@@ -75,21 +77,19 @@ export class RewardsService {
       .pipe(
         tap((data) => {
           this.connectionsService.getCommands();
-          this.authService.successMessage.set(data.message || 'Added slot');
+          this.authService.setSuccessMessage(data.message ?? 'Added slot');
         })
       );
   }
 
-  changeCommandSwitch(body: commandSwitch, streamerName: string): Observable<MessageResponse> {
-    return this.http
-      .put<MessageResponse>(`${environment.url}command_switch`, {
-        body,
-        user: streamerName,
-      })
-      .pipe(distinctUntilChanged());
+  public changeCommandSwitch(body: CommandSwitch, streamerName: string): Observable<MessageResponse> {
+    return this.http.put<MessageResponse>(`${environment.url}command_switch`, {
+      body,
+      user: streamerName,
+    });
   }
 
-  removeSlot(id: string, streamerName: string): Observable<MessageResponse> {
+  public removeSlot(id: string, streamerName: string): Observable<MessageResponse> {
     return this.http
       .put<MessageResponse>(`${environment.url}slot_remove`, {
         id,
@@ -98,7 +98,7 @@ export class RewardsService {
       .pipe(
         tap((data) => {
           this.connectionsService.getCommands();
-          this.authService.successMessage.set(data.message || 'Removed slot');
+          this.authService.setSuccessMessage(data.message ?? 'Removed slot');
         })
       );
   }

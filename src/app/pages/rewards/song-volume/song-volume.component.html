@@ -9,31 +9,31 @@
       <label>
         Domyślna głośność na Spotify
         <mat-slider discrete>
-          <input name="defaultVolumeSpotify" matSliderThumb [(ngModel)]="$data().min" />
+          <input name="defaultVolumeSpotify" matSliderThumb [(ngModel)]="data.min" />
         </mat-slider>
       </label>
       <label>
         Domyślna głośność na StreamElements
         <mat-slider discrete>
-          <input name="defaultVolumeSE" matSliderThumb [(ngModel)]="$data().minSR" />
+          <input name="defaultVolumeSE" matSliderThumb [(ngModel)]="data.minSR" />
         </mat-slider>
       </label>
       <label>
         Głosność po użyciu nagrody na Spotify
         <mat-slider discrete>
-          <input name="maxVolumeSpotify" matSliderThumb [(ngModel)]="$data().max" />
+          <input name="maxVolumeSpotify" matSliderThumb [(ngModel)]="data.max" />
         </mat-slider>
       </label>
       <label>
         Głosność po użyciu nagrody na StreamElements
         <mat-slider discrete>
-          <input name="maxVolumeSE" matSliderThumb [(ngModel)]="$data().maxSR" />
+          <input name="maxVolumeSE" matSliderThumb [(ngModel)]="data.maxSR" />
         </mat-slider>
       </label>
       <label class="wide-slider">
         Czas trwania nagrody (w sekundach)
         <mat-slider max="300" discrete>
-          <input name="time" matSliderThumb [(ngModel)]="$data().time" />
+          <input name="time" matSliderThumb [(ngModel)]="data.time" />
         </mat-slider>
       </label>
     </div>

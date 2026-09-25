@@ -1,12 +1,12 @@
-@for (commend of commendList; track $index) {
+@for (command of commandList(); track $index) {
 <div class="info">
-  @if (commend?.name) {
+  @if (command.name) {
   <p class="command-name">
-    {{ commend.name }}
+    {{ command.name }}
   </p>
   }
   <p class="command-description">
-    {{ commend?.description }}
+    {{ command.description }}
   </p>
 </div>
 }

@@ -1,15 +1,20 @@
-import { Component, Signal, computed, ChangeDetectionStrategy } from '@angular/core';
-
+import { ChangeDetectionStrategy, Component, Signal, computed, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon';
 import { ServerName } from '../../../models/enums';
 import { RiotAccount } from '../../../models/interfaces';
 import { ConnectionsService } from '../../../services/connections.service';
-import { InfoBoxComponent } from '../../../shered/info-box/info-box.component';
-import { MatButtonModule } from '@angular/material/button';
+import { StorageService } from '../../../core/services/storage.service';
+import { InfoBoxComponent } from '../../../shared/info-box/info-box.component';
+
+const SERVER_LABELS: Record<string, string> = Object.entries(ServerName).reduce(
+  (acc, [key, value]) => ({ ...acc, [value]: key }),
+  {}
+);
 
 @Component({
   selector: 'app-riot-connection',
@@ -27,31 +32,30 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './riot-connection.component.scss',
 })
 export class RiotConnectionComponent {
+  private readonly connectionsService = inject(ConnectionsService);
+  private readonly storage = inject(StorageService);
+
   private readonly $riotUser = this.connectionsService.$riotUser;
+
   public readonly servers: ServerName[] = Object.values(ServerName);
-  public readonly $riotAccounts: Signal<RiotAccount[]> = computed(() => this.$riotUser()?.riotAccountList || []);
+  public readonly $riotAccounts: Signal<RiotAccount[]> = computed(() => this.$riotUser()?.riotAccountList ?? []);
+
   public riotAccountData: RiotAccount = {
     name: '',
     server: ServerName.EUW,
   };
 
-  constructor(private connectionsService: ConnectionsService) {}
-
-  createRiotAccount(): void {
-    const name = localStorage.getItem('name');
-
-    this.connectionsService.addRiotAccount(this.riotAccountData.name, this.riotAccountData.server, name).subscribe();
+  public createRiotAccount(): void {
+    this.connectionsService
+      .addRiotAccount(this.riotAccountData.name, this.riotAccountData.server, this.storage.userName)
+      .subscribe();
   }
 
-  deleteRiotAccount(account: RiotAccount): void {
-    const name = localStorage.getItem('name');
-
-    this.connectionsService.removeRiotAccount(account.name, account.server, name).subscribe();
+  public deleteRiotAccount(account: RiotAccount): void {
+    this.connectionsService.removeRiotAccount(account.name, account.server, this.storage.userName).subscribe();
   }
 
-  userServerName(name: ServerName): string {
-    const server = Object.assign({}, ...Object.entries(ServerName as {}).map(([a, b]) => ({ [b.toString()]: a })));
-
-    return server[name];
+  public userServerName(server: ServerName): string {
+    return SERVER_LABELS[server];
   }
 }

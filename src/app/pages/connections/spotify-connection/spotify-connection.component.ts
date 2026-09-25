@@ -1,20 +1,23 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { ConnectionsService } from '../../../services/connections.service';
-import { InfoBoxComponent } from '../../../shered/info-box/info-box.component';
+import { StorageService } from '../../../core/services/storage.service';
+import { InfoBoxComponent } from '../../../shared/info-box/info-box.component';
 
 @Component({
-    selector: 'app-spotify-connection',
-    imports: [InfoBoxComponent, MatButtonModule],
-    templateUrl: './spotify-connection.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
-    styleUrl: './spotify-connection.component.scss'
+  selector: 'app-spotify-connection',
+  imports: [InfoBoxComponent, MatButtonModule],
+  templateUrl: './spotify-connection.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  styleUrl: './spotify-connection.component.scss',
 })
 export class SpotifyConnectionComponent {
-  constructor(private connectionsService: ConnectionsService) {}
+  private readonly connectionsService = inject(ConnectionsService);
+  private readonly storage = inject(StorageService);
 
   public connectSpotify(): void {
-    const name = localStorage.getItem('name');
-    if (name) this.connectionsService.connectSpotify(name);
+    if (this.storage.userName) {
+      this.connectionsService.connectSpotify(this.storage.userName);
+    }
   }
 }

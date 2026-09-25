@@ -14,14 +14,14 @@ export interface StreamElementsForm {
   jwtToken: string;
 }
 
-export interface Commend {
+export interface Command {
   name?: string;
   description: string;
 }
 
-export interface CommendList {
+export interface CommandList {
   title?: string;
-  list: Commend[];
+  list: Command[];
 }
 
 export interface Slot {

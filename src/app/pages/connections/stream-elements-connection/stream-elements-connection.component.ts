@@ -1,39 +1,33 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
 import { StreamElementsForm } from '../../../models/interfaces';
 import { ConnectionsService } from '../../../services/connections.service';
-import { InfoBoxComponent } from '../../../shered/info-box/info-box.component';
-import { MatButtonModule } from '@angular/material/button';
+import { StorageService } from '../../../core/services/storage.service';
+import { InfoBoxComponent } from '../../../shared/info-box/info-box.component';
 
 @Component({
-    selector: 'app-stream-elements-connection',
-    imports: [
-    FormsModule,
-    InfoBoxComponent,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatButtonModule
-],
-    templateUrl: './stream-elements-connection.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
-    styleUrl: './stream-elements-connection.component.scss'
+  selector: 'app-stream-elements-connection',
+  imports: [FormsModule, InfoBoxComponent, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule],
+  templateUrl: './stream-elements-connection.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  styleUrl: './stream-elements-connection.component.scss',
 })
 export class StreamElementsConnectionComponent {
-  constructor(private connectionsService: ConnectionsService) {}
+  private readonly connectionsService = inject(ConnectionsService);
+  private readonly storage = inject(StorageService);
+
   public streamElementsData: StreamElementsForm = {
-    accountId: null,
-    jwtToken: null,
+    accountId: '',
+    jwtToken: '',
   };
 
   public createStreamElements(): void {
-    const name = localStorage.getItem('name');
     this.connectionsService
-      .connectStreamElements(this.streamElementsData.accountId, this.streamElementsData.jwtToken, name)
+      .connectStreamElements(this.streamElementsData.accountId, this.streamElementsData.jwtToken, this.storage.userName)
       .subscribe();
   }
 }

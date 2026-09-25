@@ -12,7 +12,7 @@ export interface ActiveRiotAccount {
   server?: ServerName;
 }
 
-export interface commandSwitch {
+export interface CommandSwitch {
   chess?: boolean;
   slots?: boolean;
   song?: boolean;
@@ -21,7 +21,7 @@ export interface commandSwitch {
   wordle?: boolean;
 }
 
-export type User = {
+export interface User {
   streamer?: string;
   twitchAccessToken?: string;
   twitchRefreshToken?: string;
@@ -35,34 +35,36 @@ export type User = {
   isStreamElementsConnected?: boolean;
   code?: string;
   device?: string;
-};
+}
 
-export type Commands = {
+export interface Commands {
   streamer?: string;
   rollID?: string;
   banID?: string;
   slotsID?: Slot[];
-  commandSwitch?: commandSwitch;
+  commandSwitch?: CommandSwitch;
   wheelwinners?: string[];
-};
+}
 
-export type RiotUser = {
+export interface RiotUser {
   streamer?: string;
   activeRiotAccount?: ActiveRiotAccount;
   riotAccountList?: RiotAccount[];
   matchList: string[];
-};
+}
 
-export type SongData = {
+export interface SongSkipQueue {
+  isActive: boolean;
+  pauseAfterRequest: boolean;
+  size: number;
+}
+
+export interface SongData {
   streamer?: string;
   addSongID?: string;
   volumeChanger?: VolumeSong;
-  timeoutVolume?: any;
+  timeoutVolume?: number;
   maxVolumeTime?: number;
   endTime?: number;
-  skipSongs?: {
-    isActive: boolean;
-    pauseAfterRequest: boolean;
-    size: number;
-  };
-};
+  skipSongs?: SongSkipQueue;
+}

@@ -1,7 +1,7 @@
 <app-grid-wrapper>
-  @for (commend of getCommandsList(); track $index) {
-  <app-info-box [title]="commend.title">
-    <app-info-card [commendList]="commend.list"></app-info-card>
+  @for (commandList of getCommandsList(); track $index) {
+  <app-info-box [title]="commandList.title">
+    <app-info-card [commandList]="commandList.list" />
   </app-info-box>
   }
 </app-grid-wrapper>

@@ -1,10 +1,9 @@
-import { Component, effect, ChangeDetectionStrategy } from '@angular/core';
-import { commandSwitch } from '../../../models/user-interfaces';
-import { RewardsService } from '../../../services/rewards.service';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-
+import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { CommandSwitch } from '../../../models/user-interfaces';
 import { ConnectionsService } from '../../../services/connections.service';
+import { RewardsService } from '../../../services/rewards.service';
 
 @Component({
   selector: 'app-commands',
@@ -14,8 +13,11 @@ import { ConnectionsService } from '../../../services/connections.service';
   styleUrl: './commands.component.scss',
 })
 export class CommandsComponent {
+  private readonly connectionsService = inject(ConnectionsService);
+  private readonly rewardsService = inject(RewardsService);
   private readonly $userCommands = this.connectionsService.$userCommands;
-  public commands: commandSwitch = {
+
+  public commands: CommandSwitch = {
     weather: true,
     tft: true,
     chess: true,
@@ -23,28 +25,21 @@ export class CommandsComponent {
     slots: true,
     song: true,
   };
-  streamerName: string;
 
-  constructor(private connectionsService: ConnectionsService, private rewardsService: RewardsService) {
+  private streamerName = '';
+
+  constructor() {
     effect(() => {
-      this.initCommands();
+      const userCommands = this.$userCommands();
+
+      if (userCommands?.commandSwitch) {
+        this.commands = userCommands.commandSwitch;
+        this.streamerName = userCommands.streamer ?? '';
+      }
     });
   }
 
   public changeCommand(): void {
-    setTimeout(() => {
-      this.rewardsService.changeCommandSwitch(this.commands, this.streamerName).subscribe();
-    });
-  }
-
-  public ngOnInit(): void {
-    this.initCommands();
-  }
-
-  private initCommands(): void {
-    if (this.$userCommands()?.commandSwitch) {
-      this.commands = this.$userCommands().commandSwitch;
-      this.streamerName = this.$userCommands().streamer;
-    }
+    this.rewardsService.changeCommandSwitch(this.commands, this.streamerName).subscribe();
   }
 }

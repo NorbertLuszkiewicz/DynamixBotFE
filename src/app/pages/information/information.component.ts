@@ -1,22 +1,25 @@
-
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommendList } from '../../models/interfaces';
+import { Command, CommandList } from '../../models/interfaces';
 import { AuthService } from '../../services/auth.service';
 import { ConnectionsService } from '../../services/connections.service';
-import { GridWrapperComponent } from '../../shered/grid-wrapper/grid-wrapper.component';
-import { InfoBoxComponent } from '../../shered/info-box/info-box.component';
+import { GridWrapperComponent } from '../../shared/grid-wrapper/grid-wrapper.component';
+import { InfoBoxComponent } from '../../shared/info-box/info-box.component';
 import { InfoCardComponent } from './info-card/info-card.component';
 
 @Component({
-    selector: 'app-information',
-    imports: [GridWrapperComponent, InfoBoxComponent, InfoCardComponent],
-    templateUrl: './information.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
-    styleUrl: './information.component.scss'
+  selector: 'app-information',
+  imports: [GridWrapperComponent, InfoBoxComponent, InfoCardComponent],
+  templateUrl: './information.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  styleUrl: './information.component.scss',
 })
-export class InformationComponent {
-  private defaultCommendList = [
+export class InformationComponent implements OnInit {
+  private readonly route = inject(ActivatedRoute);
+  private readonly authService = inject(AuthService);
+  private readonly connectionsService = inject(ConnectionsService);
+
+  private readonly defaultCommandList: Command[] = [
     {
       name: '!dynamix',
       description: "Sprawdzająca połączenie z botem, powinna zwrócić 'Bot Works!'",
@@ -47,7 +50,7 @@ export class InformationComponent {
     },
   ];
 
-  private spotifyAndSECommendList = [
+  private readonly spotifyAndSECommandList: Command[] = [
     {
       name: '!song',
       description:
@@ -81,7 +84,7 @@ export class InformationComponent {
     },
   ];
 
-  private riotCommendList = [
+  private readonly riotCommandList: Command[] = [
     {
       name: '!ranking [server]',
       description: 'Zwraca top 10 serwera tft, bez podania [server] zwraca dla serwera EUW',
@@ -103,7 +106,7 @@ export class InformationComponent {
     },
   ];
 
-  private chessCommendList = [
+  private readonly chessCommandList: Command[] = [
     {
       name: '!chessuser [nickname]/ !szachista [nickname]',
       description: 'Zwraca statystyki użytkownika na chess.com',
@@ -114,7 +117,7 @@ export class InformationComponent {
     },
   ];
 
-  private additionalInformationList = [
+  private readonly additionalInformationList: Command[] = [
     {
       name: '',
       description: 'W celu zapewnienia pełnej funkcjonalności, bot powinien posiadać status moderatora na czacie',
@@ -126,31 +129,19 @@ export class InformationComponent {
     },
   ];
 
-  public getCommandsList(): CommendList[] {
+  public getCommandsList(): CommandList[] {
     return [
-      { title: 'Domyślne komendy', list: this.defaultCommendList },
-      {
-        title: 'Integracja z Spotify i StreamElements',
-        list: this.spotifyAndSECommendList,
-      },
-      {
-        title: 'Komendy po połączeniu z Riot Games',
-        list: this.riotCommendList,
-      },
-      { title: 'Komendy z Chess.com', list: this.chessCommendList },
+      { title: 'Domyślne komendy', list: this.defaultCommandList },
+      { title: 'Integracja z Spotify i StreamElements', list: this.spotifyAndSECommandList },
+      { title: 'Komendy po połączeniu z Riot Games', list: this.riotCommandList },
+      { title: 'Komendy z Chess.com', list: this.chessCommandList },
       { title: 'Dodatkowe Informacje', list: this.additionalInformationList },
     ];
   }
 
-  public identify(i: number): number {
-    return i;
+  public ngOnInit(): void {
+    this.getLoginRedirectData();
   }
-
-  constructor(
-    private route: ActivatedRoute,
-    private authService: AuthService,
-    private connectionsService: ConnectionsService
-  ) {}
 
   private getLoginRedirectData(): void {
     const name = this.route.snapshot.queryParams['name'];
@@ -162,9 +153,5 @@ export class InformationComponent {
       this.connectionsService.getCommands();
       this.connectionsService.getSongsUser();
     }
-  }
-
-  ngOnInit(): void {
-    this.getLoginRedirectData();
   }
 }
