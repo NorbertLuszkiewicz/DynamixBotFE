@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommendList } from '../../models/interfaces';
 import { AuthService } from '../../services/auth.service';
@@ -9,11 +9,11 @@ import { InfoBoxComponent } from '../../shered/info-box/info-box.component';
 import { InfoCardComponent } from './info-card/info-card.component';
 
 @Component({
-  selector: 'app-information',
-  standalone: true,
-  imports: [CommonModule, GridWrapperComponent, InfoBoxComponent, InfoCardComponent],
-  templateUrl: './information.component.html',
-  styleUrl: './information.component.scss',
+    selector: 'app-information',
+    imports: [GridWrapperComponent, InfoBoxComponent, InfoCardComponent],
+    templateUrl: './information.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
+    styleUrl: './information.component.scss'
 })
 export class InformationComponent {
   private defaultCommendList = [

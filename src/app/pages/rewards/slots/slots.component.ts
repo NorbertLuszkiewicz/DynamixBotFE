@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, computed, Signal } from '@angular/core';
+import { Component, effect, computed, Signal, ChangeDetectionStrategy } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -13,11 +13,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ConnectionsService } from '../../../services/connections.service';
-import { MatCommonModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-slots',
-  standalone: true,
   imports: [
     CommonModule,
     FormsModule,
@@ -30,9 +28,9 @@ import { MatCommonModule } from '@angular/material/core';
     MatIconModule,
     MatButtonModule,
     InfoBoxComponent,
-    MatCommonModule,
   ],
   templateUrl: './slots.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './slots.component.scss',
 })
 export class SlotsComponent {

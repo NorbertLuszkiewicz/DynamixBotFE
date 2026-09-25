@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -10,19 +10,18 @@ import { InfoBoxComponent } from '../../../shered/info-box/info-box.component';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-stream-elements-connection',
-  standalone: true,
-  imports: [
-    CommonModule,
+    selector: 'app-stream-elements-connection',
+    imports: [
     FormsModule,
     InfoBoxComponent,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule,
-  ],
-  templateUrl: './stream-elements-connection.component.html',
-  styleUrl: './stream-elements-connection.component.scss',
+    MatButtonModule
+],
+    templateUrl: './stream-elements-connection.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
+    styleUrl: './stream-elements-connection.component.scss'
 })
 export class StreamElementsConnectionComponent {
   constructor(private connectionsService: ConnectionsService) {}

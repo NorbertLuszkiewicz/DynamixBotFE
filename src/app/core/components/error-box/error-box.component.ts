@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
-  selector: 'app-error-box',
-  standalone: true,
-  imports: [],
-  templateUrl: './error-box.component.html',
-  styleUrl: './error-box.component.scss',
+    selector: 'app-error-box',
+    imports: [],
+    templateUrl: './error-box.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
+    styleUrl: './error-box.component.scss'
 })
 export class ErrorBoxComponent {
   public readonly message = this.authService.errorMessage;

@@ -1,5 +1,9 @@
 <app-layout-main>
   <router-outlet></router-outlet>
-  <app-error-box *ngIf="!!errorMessage()"></app-error-box>
-  <app-success-box *ngIf="!!successMessage()"></app-success-box>
+  @if (!!errorMessage()) {
+    <app-error-box></app-error-box>
+  }
+  @if (!!successMessage()) {
+    <app-success-box></app-success-box>
+  }
 </app-layout-main>

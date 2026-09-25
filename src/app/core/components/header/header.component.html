@@ -9,47 +9,54 @@
       'navigation--mobile': isHandset$ | async,
       'navigation--open': isOpenMenu
     }"
-  >
+    >
     <div class="spacer"></div>
     <a class="nav-link" routerLink="/information" routerLinkActive="active" (click)="isOpenMenu = false">
       Informacje
     </a>
-    <a
-      *ngIf="isLoggedIn()"
-      class="nav-link"
-      routerLink="/connections"
-      routerLinkActive="active"
-      (click)="isOpenMenu = false"
-    >
-      Integracje
-    </a>
-    <a
-      *ngIf="isLoggedIn()"
-      class="nav-link"
-      routerLink="/rewards"
-      routerLinkActive="active"
-      (click)="isOpenMenu = false"
-    >
-      Nagrody kanału
-    </a>
+    @if (isLoggedIn()) {
+      <a
+        class="nav-link"
+        routerLink="/connections"
+        routerLinkActive="active"
+        (click)="isOpenMenu = false"
+        >
+        Integracje
+      </a>
+    }
+    @if (isLoggedIn()) {
+      <a
+        class="nav-link"
+        routerLink="/rewards"
+        routerLinkActive="active"
+        (click)="isOpenMenu = false"
+        >
+        Nagrody kanału
+      </a>
+    }
     <div class="spacer"></div>
     <div class="login-wrapper">
-      <a *ngIf="!isLoggedIn()" mat-raised-button color="accent" class="login" (click)="login()">
-        <img src="assets/twitch_logo.png" alt="twitch logo" />
-        Login
-      </a>
-      <a *ngIf="isLoggedIn()" mat-raised-button class="login" (click)="logout()"> Logout </a>
+      @if (!isLoggedIn()) {
+        <a mat-raised-button color="accent" class="login" (click)="login()">
+          <img src="assets/twitch_logo.png" alt="twitch logo" />
+          Login
+        </a>
+      }
+      @if (isLoggedIn()) {
+        <a mat-raised-button class="login" (click)="logout()"> Logout </a>
+      }
     </div>
   </nav>
   <input #menu type="checkbox" (click)="changeMenu()" class="openSidebarMenu" id="openSidebarMenu" />
-  <label
-    *ngIf="isHandset$ | async"
-    for="openSidebarMenu"
-    class="sidebarIconToggle"
-    [ngClass]="{ openMenu: isOpenMenu }"
-  >
-    <div class="spinner diagonal part-1"></div>
-    <div class="spinner horizontal"></div>
-    <div class="spinner diagonal part-2"></div>
-  </label>
+  @if (isHandset$ | async) {
+    <label
+      for="openSidebarMenu"
+      class="sidebarIconToggle"
+      [ngClass]="{ openMenu: isOpenMenu }"
+      >
+      <div class="spinner diagonal part-1"></div>
+      <div class="spinner horizontal"></div>
+      <div class="spinner diagonal part-2"></div>
+    </label>
+  }
 </mat-toolbar>

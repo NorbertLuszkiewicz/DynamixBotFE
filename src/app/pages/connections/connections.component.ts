@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { GridWrapperComponent } from '../../shered/grid-wrapper/grid-wrapper.component';
 import { RiotConnectionComponent } from './riot-connection/riot-connection.component';
 import { SpotifyConnectionComponent } from './spotify-connection/spotify-connection.component';
@@ -7,17 +7,17 @@ import { StreamElementsConnectionComponent } from './stream-elements-connection/
 import { KickConnectionComponent } from './kick-connection/kick-connection.component';
 
 @Component({
-  selector: 'app-connections',
-  standalone: true,
-  imports: [
-    RiotConnectionComponent,
-    SpotifyConnectionComponent,
-    StatusComponent,
-    StreamElementsConnectionComponent,
-    GridWrapperComponent,
-    KickConnectionComponent,
-  ],
-  templateUrl: './connections.component.html',
-  styleUrl: './connections.component.scss',
+    selector: 'app-connections',
+    imports: [
+        RiotConnectionComponent,
+        SpotifyConnectionComponent,
+        StatusComponent,
+        StreamElementsConnectionComponent,
+        GridWrapperComponent,
+        KickConnectionComponent,
+    ],
+    templateUrl: './connections.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
+    styleUrl: './connections.component.scss'
 })
 export class ConnectionsComponent {}

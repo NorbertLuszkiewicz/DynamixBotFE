@@ -1,7 +1,9 @@
 <app-grid-wrapper>
-  <app-info-box *ngFor="let commend of getCommandsList(); trackBy: identify" [title]="commend.title">
+  @for (commend of getCommandsList(); track $index) {
+  <app-info-box [title]="commend.title">
     <app-info-card [commendList]="commend.list"></app-info-card>
   </app-info-box>
+  }
 </app-grid-wrapper>
 
 <div class="contact">

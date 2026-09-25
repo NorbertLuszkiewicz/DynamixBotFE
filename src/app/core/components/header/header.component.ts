@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -11,11 +11,11 @@ import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatDividerModule, RouterModule, RouterLink],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
+    selector: 'app-header',
+    imports: [CommonModule, MatToolbarModule, MatButtonModule, MatDividerModule, RouterModule, RouterLink],
+    templateUrl: './header.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
+    styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
   private readonly loginUrl = environment.loginRedirect;

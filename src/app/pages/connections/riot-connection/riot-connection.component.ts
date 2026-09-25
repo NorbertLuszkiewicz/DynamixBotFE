@@ -1,5 +1,5 @@
-import { Component, Signal, computed } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Signal, computed, ChangeDetectionStrategy } from '@angular/core';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -10,13 +10,10 @@ import { RiotAccount } from '../../../models/interfaces';
 import { ConnectionsService } from '../../../services/connections.service';
 import { InfoBoxComponent } from '../../../shered/info-box/info-box.component';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCommonModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-riot-connection',
-  standalone: true,
   imports: [
-    CommonModule,
     InfoBoxComponent,
     MatFormFieldModule,
     MatInputModule,
@@ -24,9 +21,9 @@ import { MatCommonModule } from '@angular/material/core';
     MatIconModule,
     FormsModule,
     MatButtonModule,
-    MatCommonModule,
   ],
   templateUrl: './riot-connection.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './riot-connection.component.scss',
 })
 export class RiotConnectionComponent {

@@ -1,9 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { Component, computed } from '@angular/core';
+import { Component, computed, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatCommonModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
@@ -13,18 +11,9 @@ import { ConnectionsService } from '../../../services/connections.service';
 
 @Component({
   selector: 'app-song-queue',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSlideToggleModule,
-    MatButtonModule,
-    InfoBoxComponent,
-    MatCommonModule,
-  ],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatSlideToggleModule, MatButtonModule, InfoBoxComponent],
   templateUrl: './song-queue.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './song-queue.component.scss',
 })
 export class SongQueueComponent {

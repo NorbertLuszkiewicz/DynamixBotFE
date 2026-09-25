@@ -1,17 +1,16 @@
-import { Component, effect } from '@angular/core';
+import { Component, effect, ChangeDetectionStrategy } from '@angular/core';
 import { commandSwitch } from '../../../models/user-interfaces';
 import { RewardsService } from '../../../services/rewards.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { CommonModule } from '@angular/common';
-import { MatCommonModule } from '@angular/material/core';
+
 import { FormsModule } from '@angular/forms';
 import { ConnectionsService } from '../../../services/connections.service';
 
 @Component({
   selector: 'app-commands',
-  standalone: true,
-  imports: [MatCommonModule, CommonModule, MatSlideToggleModule, FormsModule],
+  imports: [MatSlideToggleModule, FormsModule],
   templateUrl: './commands.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './commands.component.scss',
 })
 export class CommandsComponent {

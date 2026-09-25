@@ -1,13 +1,12 @@
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-info-box',
-  standalone: true,
-  imports: [NgClass, NgIf],
-  templateUrl: './info-box.component.html',
-  styleUrl: './info-box.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-info-box',
+    imports: [NgClass],
+    templateUrl: './info-box.component.html',
+    styleUrl: './info-box.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InfoBoxComponent {
   @Input() title: string;

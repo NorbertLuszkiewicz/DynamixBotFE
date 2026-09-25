@@ -1,19 +1,17 @@
-import { CommonModule } from '@angular/common';
-import { Component, effect, Signal, computed } from '@angular/core';
+import { Component, effect, Signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { RewardsService } from '../../../services/rewards.service';
 import { InfoBoxComponent } from '../../../shered/info-box/info-box.component';
 import { ConnectionsService } from '../../../services/connections.service';
-import { MatCommonModule } from '@angular/material/core';
 import { VolumeSong } from '../../../models/interfaces';
 
 @Component({
   selector: 'app-song-volume',
-  standalone: true,
-  imports: [InfoBoxComponent, MatSliderModule, FormsModule, CommonModule, MatButtonModule, MatCommonModule],
+  imports: [InfoBoxComponent, MatSliderModule, FormsModule, MatButtonModule],
   templateUrl: './song-volume.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './song-volume.component.scss',
 })
 export class SongVolumeComponent {

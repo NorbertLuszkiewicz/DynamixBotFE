@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ErrorBoxComponent } from './core/components/error-box/error-box.component';
 import { SuccessBoxComponent } from './core/components/success-box/success-box.component';
@@ -8,11 +8,11 @@ import { AuthService } from './services/auth.service';
 import { ConnectionsService } from './services/connections.service';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, LayoutMainComponent, ErrorBoxComponent, SuccessBoxComponent, CommonModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+    selector: 'app-root',
+    imports: [RouterOutlet, LayoutMainComponent, ErrorBoxComponent, SuccessBoxComponent],
+    templateUrl: './app.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
   public readonly errorMessage = this.authService.errorMessage;
